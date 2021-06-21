@@ -1,0 +1,19 @@
+.container {
+  min-width: 200px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  border-left: 2px solid gray;
+}
+
+.container > a {
+  background-color: hsl(32, 100%, 50%);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  color: white;
+  letter-spacing: 0.5px;
+}

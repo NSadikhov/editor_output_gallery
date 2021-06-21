@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 2em 0;
+}
+
+.container > :not(.divider) {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.divider {
+  width: 4px;
+  height: 90%;
+  background-color: hsla(30, 2%, 35%, 0.5);
+}
+
+.headerText {
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.inputSection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+
+.inputSection > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.colorPicker {
+  cursor: pointer;
+  width: 100%;
+}
+
+.size {
+  width: 100%;
+  border: 1px solid hsla(30, 2%, 35%, 0.5);
+  padding: 2px 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.borderRadius {
+  width: 100%;
+}
+
+.saveBtn {
+  margin-top: 30px;
+  padding: 0.5em;
+  border-radius: 0.75em;
+  font-size: 1.5rem;
+  background-color: hsl(32, 100%, 50%);
+  color: white;
+  cursor: pointer;
+}
+
+.resultSection {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.result {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: orange;
+}
