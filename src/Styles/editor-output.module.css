@@ -17,6 +17,7 @@
 .divider {
   width: 4px;
   height: 90%;
+  border: 2px dashed white;
   background-color: hsla(30, 2%, 35%, 0.5);
 }
 
@@ -64,12 +65,26 @@
 
 .saveBtn {
   margin-top: 30px;
-  padding: 0.5em;
-  border-radius: 0.75em;
-  font-size: 1.5rem;
+  padding: 0.6em;
+  border-radius: 0.6em;
+  font-size: 1.35rem;
   background-color: hsl(32, 100%, 50%);
   color: white;
   cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px hsl(0, 0%, 93%);
+  transition: 0.5s;
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    to right,
+    hsl(46, 76%, 53%) 0%,
+    hsl(13, 78%, 65%) 51%,
+    hsl(46, 76%, 53%) 100%
+  );
+}
+
+.saveBtn:hover {
+  background-position: right center;
 }
 
 .resultSection {
@@ -79,8 +94,8 @@
 }
 
 .result {
-  width: 200px;
-  height: 200px;
-  border-radius: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 25%;
   background-color: orange;
 }
