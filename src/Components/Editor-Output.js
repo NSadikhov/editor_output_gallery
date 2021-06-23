@@ -1,18 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import classes from '../Styles/editor-output.module.css';
-import { usePersistedStateLocal } from '../Utils';
+import { EDITOR_INPUT_DATA, GALLERY_DATA, usePersistedStateLocal } from '../Utils';
 
-const EDITOR_INPUT_DATA = 'editor-input-data';
+const MIN_SIZE_VALUE = 10;
+const MAX_SIZE_VALUE = 250;
 
 const Editor_Output = () => {
 
     const resultRef = useRef(null);
+    const popUpRef = useRef(null);
+    const popUpInputRef = useRef(null);
 
     const [inputData, setInputData] = usePersistedStateLocal(EDITOR_INPUT_DATA, {
         color: '#FFA500',
         size: 150,
         radius: 25
     })
+
+    const [galleryData, setGalleryData] = usePersistedStateLocal(GALLERY_DATA, null);
 
     const handleInputChange = (e) => {
         const target = e.currentTarget;
@@ -23,7 +28,7 @@ const Editor_Output = () => {
                 resultRef.current.style.backgroundColor = value;
                 break;
             case 'size':
-                if (target.value > 10 && target.value < 300) {
+                if (target.value > MIN_SIZE_VALUE && target.value < MAX_SIZE_VALUE) {
                     value = target.valueAsNumber;
                     resultRef.current.style.width = value + 'px';
                     resultRef.current.style.height = value + 'px';
@@ -42,15 +47,33 @@ const Editor_Output = () => {
 
     const handleInputBlur = (e) => {
         const target = e.currentTarget;
-        if (target.value < 10) target.value = 10;
-        if (target.value > 300) target.value = 300;
+        if (target.value < MIN_SIZE_VALUE) target.value = MIN_SIZE_VALUE;
+        if (target.value > MAX_SIZE_VALUE) target.value = MAX_SIZE_VALUE;
         resultRef.current.style.width = target.valueAsNumber + 'px';
         resultRef.current.style.height = target.valueAsNumber + 'px';
         setInputData((prevS) => ({ ...prevS, [target.name]: target.valueAsNumber }))
     }
 
     const handleSave = (e) => {
+        popUpRef.current.style.opacity = 1;
+        popUpRef.current.style.visibility = 'visible';
+    }
 
+    const handleClickAway = (e, isForced = false) => {
+        if (e.target === popUpRef.current || isForced) {
+            popUpRef.current.style.opacity = 0;
+            popUpRef.current.style.visibility = 'hidden';
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const name = popUpInputRef.current.value.trim();
+        if (name !== '') {
+            if (galleryData) setGalleryData(galleryData.concat({ name, ...inputData }));
+            else setGalleryData([{ name, ...inputData }]);
+            handleClickAway(e, true);
+        }
     }
 
     useEffect(() => {
@@ -79,7 +102,7 @@ const Editor_Output = () => {
                         <label htmlFor='borderRadius'>Radius: </label>
                         <input onChange={handleInputChange} name='radius' defaultValue={inputData.radius * 2} type="range" id='borderRadius' className={classes.borderRadius}></input>
                     </div>
-                    <button className={classes.saveBtn}>Save</button>
+                    <button className={classes.saveBtn} onClick={handleSave}>Save</button>
                 </div>
             </div>
             <div className={classes.divider}></div>
@@ -88,6 +111,15 @@ const Editor_Output = () => {
                 <div className={classes.resultSection}>
                     <div className={classes.result} ref={resultRef} />
                 </div>
+            </div>
+            <div className={classes.popUpContainer} ref={popUpRef} onClick={handleClickAway}>
+                <form className={classes.popUp} onSubmit={handleSubmit}>
+                    <h1>Assign a name to your design</h1>
+                    <div className={classes.popUpInputField}>
+                        <input type='text' ref={popUpInputRef} spellCheck={false} placeholder='e.g. Layout-1' />
+                    </div>
+                    <button type='submit'>Submit</button>
+                </form>
             </div>
         </div>
     );

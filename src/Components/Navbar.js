@@ -7,9 +7,11 @@ import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 const Navbar = () => {
     return (
         <div className={classes.container}>
-            <ExitToAppRoundedIcon className={classes.icon} />
-            <Link to='/'>Editor & Output</Link>
-            <Link to='/gallery'>Gallery</Link>
+            <div className={classes.navBar}>
+                <ExitToAppRoundedIcon className={classes.icon} />
+                <Link to='/'>Editor & Output</Link>
+                <Link to='/gallery'>Gallery</Link>
+            </div>
         </div>
     );
 }
