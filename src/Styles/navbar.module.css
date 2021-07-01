@@ -1,25 +1,50 @@
 .container {
   min-width: 250px;
-  min-height: 100vh;
-
+  height: 100%;
+  position: fixed;
   font-size: 1.2rem;
-  border-left: 2px solid hsla(30, 2%, 35%, 0.5);
-  position: relative;
+  background-color: white;
+  display: grid;
+  right: 0;
+  transition-duration: 300ms;
+  overflow: hidden;
 }
 
-.navBar {
-  /* position: fixed; */
-  right: 0;
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  /* background-color: red; */
+  transform: skewX(-10deg) rotateZ(40deg);
+  box-shadow: inset 0 0 0 20px hsl(39, 100%, 50%), inset 0 0 0 40px white,
+    inset 0 0 0 60px hsla(108, 78%, 57%, 0.774), inset 0 0 0 80px white,
+    inset 0 0 0 100px hsl(39, 100%, 50%);
+  z-index: -1;
+}
+
+.container[data-toggle="closed"]::before {
+  transform: rotateZ(40deg);
+}
+
+.tabs {
+  margin: auto 0;
+  padding: 1em 0;
+  height: fit-content;
   display: grid;
   justify-content: center;
   place-items: center;
   align-content: center;
+  background-color: white;
   gap: 10px;
 }
 
-.navBar > a {
+.container[data-toggle="closed"] > .tabs {
+  display: none;
+}
+
+.tabs > a {
   background-color: hsl(32, 100%, 50%);
   border-radius: 0.5em;
   padding: 0.5em;
@@ -36,7 +61,7 @@
   );
 }
 
-.navBar > a:hover {
+.tabs > a:hover {
   background-position: right center;
 }
 
@@ -49,9 +74,22 @@
   border: 2px solid hsl(0, 0%, 70%) !important;
   cursor: pointer;
   border-radius: 0.25em !important;
-  transition: color 150ms ease-out !important;
+  transition: all 250ms ease-out, color 150ms ease-out !important;
+}
+
+.container[data-toggle="closed"] > .icon {
+  transform: rotateZ(180deg);
 }
 
 .icon:hover {
   color: hsl(13, 78%, 65%) !important;
+}
+
+.border {
+  position: absolute;
+  border-right: 2px solid hsla(30, 2%, 35%, 0.5);
+  height: 100%;
+  left: 0;
+  top: 0;
+  cursor: ew-resize;
 }
