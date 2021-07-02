@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const EDITOR_INPUT_DATA = 'editor-input-data';
+export const EDITOR_OUTPUT_DATA = 'editor-output-data';
 export const GALLERY_DATA = 'gallery-data';
 
 export const usePersistedStateLocal = (key, value) => {

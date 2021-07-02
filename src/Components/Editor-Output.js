@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from '../Styles/editor-output.module.css';
-import { EDITOR_INPUT_DATA, GALLERY_DATA, usePersistedStateLocal } from '../Utils';
+import { EDITOR_OUTPUT_DATA, GALLERY_DATA, usePersistedStateLocal } from '../Utils';
 
 const MIN_SIZE_VALUE = 10;
 const MAX_SIZE_VALUE = 250;
@@ -11,13 +11,18 @@ const Editor_Output = () => {
     const popUpRef = useRef(null);
     const popUpInputRef = useRef(null);
 
-    const [inputData, setInputData] = usePersistedStateLocal(EDITOR_INPUT_DATA, {
+    const [inputData, setInputData] = usePersistedStateLocal(EDITOR_OUTPUT_DATA, {
         color: '#FFA500',
         size: 150,
-        radius: 25
+        radius: 25,
+        name: ''
     })
 
     const [galleryData, setGalleryData] = usePersistedStateLocal(GALLERY_DATA, null);
+
+    const [galleryDataNames, setGalleryDataNames] = useState([]);
+
+    const [exist, setExist] = useState(false);
 
     const handleInputChange = (e) => {
         const target = e.currentTarget;
@@ -54,9 +59,10 @@ const Editor_Output = () => {
         setInputData((prevS) => ({ ...prevS, [target.name]: target.valueAsNumber }))
     }
 
-    const handleSave = (e) => {
+    const handleSave = () => {
         popUpRef.current.style.opacity = 1;
         popUpRef.current.style.visibility = 'visible';
+        setTimeout(() => popUpInputRef.current.focus(), 300);
     }
 
     const handleClickAway = (e, isForced = false) => {
@@ -70,10 +76,18 @@ const Editor_Output = () => {
         e.preventDefault();
         const name = popUpInputRef.current.value.trim();
         if (name !== '') {
-            if (galleryData) setGalleryData(galleryData.concat({ name, ...inputData }));
-            else setGalleryData([{ name, ...inputData }]);
+            if (galleryData) {
+                if (galleryData.find(each => each.name === name))
+                    setGalleryData(galleryData.map(each => each.name === name ? { ...inputData, name } : each))
+                else setGalleryData([{ ...inputData, name }].concat(galleryData));
+            }
+            else setGalleryData([{ ...inputData, name }]);
             handleClickAway(e, true);
         }
+    }
+
+    const handleNameInputChange = (e) => {
+        setExist(galleryDataNames.includes(e.currentTarget.value.trim()));
     }
 
     useEffect(() => {
@@ -84,6 +98,14 @@ const Editor_Output = () => {
             resultRef.current.style.borderRadius = inputData.radius + '%';
         }
     }, [resultRef.current])
+
+    useEffect(() => {
+        if (galleryData) {
+            const data = galleryData.map(each => each.name);
+            setGalleryDataNames(data);
+            setExist(data.includes(popUpInputRef.current.value.trim()));
+        }
+    }, [galleryData])
 
     return (
         <div className={classes.container}>
@@ -116,8 +138,13 @@ const Editor_Output = () => {
                 <form className={classes.popUp} onSubmit={handleSubmit}>
                     <h1>Assign a name to your design</h1>
                     <div className={classes.popUpInputField}>
-                        <input type='text' ref={popUpInputRef} spellCheck={false} placeholder='e.g. Layout-1' />
+                        <input type='text' autoFocus onChange={handleNameInputChange} defaultValue={inputData.name} ref={popUpInputRef} spellCheck={false} placeholder='e.g. Layout-1' />
                     </div>
+                    {exist && <p>
+                        <span>* A design with this name already exists.</span>
+                        <span>* If submitted, changes will be applied to the design.</span>
+                    </p>
+                    }
                     <button type='submit'>Submit</button>
                 </form>
             </div>

@@ -129,6 +129,12 @@
   font-weight: normal;
 }
 
+.popUp > p {
+  font-size: 0.9rem;
+  display: grid;
+  color: red;
+}
+
 .popUpInputField {
   position: relative;
 }
@@ -188,4 +194,15 @@
 
 .popUp > button:hover {
   background-position: right center;
+}
+
+@media (max-width: 800px) {
+  .container {
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    display: grid;
+    /* place-items: center; */
+    justify-content: center;
+  }
 }

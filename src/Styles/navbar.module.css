@@ -8,6 +8,7 @@
   right: 0;
   transition-duration: 300ms;
   overflow: hidden;
+  z-index: 1;
 }
 
 .container::before {

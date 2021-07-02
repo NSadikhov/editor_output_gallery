@@ -4,7 +4,7 @@ import classes from '../Styles/navbar.module.css';
 
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     const containerRef = useRef(null);
 
@@ -12,8 +12,14 @@ const Navbar = () => {
         const getAttributeValue = containerRef.current.getAttribute('data-toggle');
         containerRef.current.setAttribute('data-toggle', getAttributeValue === 'open' ? 'closed' : 'open');
 
-        if (getAttributeValue === 'open') containerRef.current.style.minWidth = '60px';
-        else containerRef.current.style.minWidth = '250px';
+        if (getAttributeValue === 'open') {
+            containerRef.current.style.minWidth = '60px';
+            props.contentRef.current.style.width = 'calc(100% - 60px)';
+        }
+        else {
+            containerRef.current.style.minWidth = '250px';
+            props.contentRef.current.style.width = 'calc(100% - 250px)';
+        }
     }
 
     const handleOnMouseDown = (e) => {
@@ -28,6 +34,8 @@ const Navbar = () => {
         if (size <= 250 && size >= 60) {
             containerRef.current.style.transitionDuration = '0ms';
             containerRef.current.style.minWidth = size + 'px';
+
+            props.contentRef.current.style.width = `calc(100% - ${size}px)`;
 
             if (size <= 125) containerRef.current.setAttribute('data-toggle', 'closed');
             else containerRef.current.setAttribute('data-toggle', 'open');
