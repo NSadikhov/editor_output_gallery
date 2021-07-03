@@ -2,7 +2,7 @@
   "name": "editor-output-gallery",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://NSadikhov.github.io/editor_output_gallery",
+  "homepage": "https://NSadikhov.github.io/editor_output_gallery",
   "dependencies": {
     "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.14.1",
