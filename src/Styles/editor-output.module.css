@@ -20,7 +20,7 @@
   width: 4px;
   height: 90%;
   border: 2px dashed white;
-  background-color: hsla(30, 2%, 35%, 0.5);
+  background-color: var(--df-border-clr);
 }
 
 .headerText {
@@ -55,7 +55,7 @@
 
 .size {
   width: 100%;
-  border: 1px solid hsla(30, 2%, 35%, 0.5);
+  border: 1px solid var(--df-border-clr);
   padding: 2px 5px;
   font-size: 1rem;
   border-radius: 5px;
@@ -79,9 +79,9 @@
   background-size: 200% auto;
   background-image: linear-gradient(
     to right,
-    hsl(46, 76%, 53%) 0%,
-    hsl(13, 78%, 65%) 51%,
-    hsl(46, 76%, 53%) 100%
+    var(--light-yellow-clr) 0%,
+    var(--light-red-clr) 51%,
+    var(--light-yellow-clr) 100%
   );
 }
 
@@ -99,7 +99,7 @@
   width: 150px;
   height: 150px;
   border-radius: 25%;
-  background-color: orange;
+  background-color: hsl(39, 100%, 50%);
 }
 
 .popUpContainer {
@@ -112,14 +112,14 @@
   display: grid;
   place-items: center;
   align-content: center;
-  transition: all 300ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 .popUp {
   padding: 1em;
   border-radius: 1em;
   background-color: white;
-  box-shadow: 0 0 10px hsl(0, 0%, 70%);
+  box-shadow: 0 0 10px var(--light-gray-clr);
   display: grid;
   gap: 10px;
 }
@@ -132,7 +132,7 @@
 .popUp > p {
   font-size: 0.9rem;
   display: grid;
-  color: red;
+  color: hsl(0, 100%, 50%);
 }
 
 .popUpInputField {
@@ -146,14 +146,14 @@
 }
 
 .popUpInputField:focus-within::after {
-  background-color: hsl(13, 78%, 65%);
+  background-color: var(--light-red-clr);
   transform: scale(1);
 }
 
 .popUpInputField::before {
   content: "";
-  background-color: hsl(0, 0%, 70%);
-  transition: 300ms;
+  background-color: var(--light-gray-clr);
+  transition: 250ms;
   width: 100%;
   height: 1px;
   position: absolute;
@@ -163,8 +163,8 @@
 
 .popUpInputField::after {
   content: "";
-  background-color: hsl(0, 0%, 70%);
-  transition: all 400ms ease-out;
+  background-color: var(--light-gray-clr);
+  transition: all 350ms ease-out;
   width: 100%;
   height: 1px;
   position: absolute;
@@ -186,9 +186,9 @@
   color: white;
   background-image: linear-gradient(
     to right,
-    hsl(46, 76%, 53%) 0%,
-    hsl(13, 78%, 65%) 51%,
-    hsl(46, 76%, 53%) 100%
+    var(--light-yellow-clr) 0%,
+    var(--light-red-clr) 51%,
+    var(--light-yellow-clr) 100%
   );
 }
 
@@ -198,11 +198,21 @@
 
 @media (max-width: 800px) {
   .container {
-    /* display: flex;
-    align-items: center;
-    justify-content: space-between; */
     display: grid;
-    /* place-items: center; */
     justify-content: center;
+    gap: 2em;
+    height: auto;
+  }
+
+  .divider {
+    width: 100%;
+    height: 4px;
+    border: 2px dashed white;
+    background-color: var(--df-border-clr);
+  }
+
+  .editor,
+  .output {
+    gap: 1.5em;
   }
 }

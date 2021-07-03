@@ -14,11 +14,11 @@ const Navbar = (props) => {
 
         if (getAttributeValue === 'open') {
             containerRef.current.style.minWidth = '60px';
-            props.contentRef.current.style.width = 'calc(100% - 60px)';
+            // props.contentRef.current.style.width = 'calc(100% - 60px)';
         }
         else {
             containerRef.current.style.minWidth = '250px';
-            props.contentRef.current.style.width = 'calc(100% - 250px)';
+            // props.contentRef.current.style.width = 'calc(100% - 250px)';
         }
     }
 
@@ -35,7 +35,7 @@ const Navbar = (props) => {
             containerRef.current.style.transitionDuration = '0ms';
             containerRef.current.style.minWidth = size + 'px';
 
-            props.contentRef.current.style.width = `calc(100% - ${size}px)`;
+            // props.contentRef.current.style.width = `calc(100% - ${size}px)`;
 
             if (size <= 125) containerRef.current.setAttribute('data-toggle', 'closed');
             else containerRef.current.setAttribute('data-toggle', 'open');

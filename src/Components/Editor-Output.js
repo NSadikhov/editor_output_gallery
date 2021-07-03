@@ -3,7 +3,7 @@ import classes from '../Styles/editor-output.module.css';
 import { EDITOR_OUTPUT_DATA, GALLERY_DATA, usePersistedStateLocal } from '../Utils';
 
 const MIN_SIZE_VALUE = 10;
-const MAX_SIZE_VALUE = 250;
+const MAX_SIZE_VALUE = 200;
 
 const Editor_Output = () => {
 
@@ -62,7 +62,7 @@ const Editor_Output = () => {
     const handleSave = () => {
         popUpRef.current.style.opacity = 1;
         popUpRef.current.style.visibility = 'visible';
-        setTimeout(() => popUpInputRef.current.focus(), 300);
+        setTimeout(() => popUpInputRef.current.focus(), 200);
     }
 
     const handleClickAway = (e, isForced = false) => {
@@ -97,7 +97,7 @@ const Editor_Output = () => {
             resultRef.current.style.backgroundColor = inputData.color;
             resultRef.current.style.borderRadius = inputData.radius + '%';
         }
-    }, [resultRef.current])
+    }, [resultRef])
 
     useEffect(() => {
         if (galleryData) {

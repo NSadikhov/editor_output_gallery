@@ -29,7 +29,7 @@ const Gallery = (props) => {
             <h1 className={classes.headerText}>Gallery</h1>
             {galleryData.length === 0 ?
                 <div className={classes.noDataSection}>
-                    <img className={classes.noData} src={noData} />
+                    <img className={classes.noData} src={noData} alt='no data found' />
                     <p>
                         {'<<< No Design Found >>>'}
                     </p>
@@ -62,8 +62,8 @@ const Gallery = (props) => {
                             <div className={classes.gallerySB_name}>{each.name}</div>
                         </div>
                     )}
-
-                    {/* {galleryData.length === 1 ? <div /> : null} */}
+                    <div />
+                    <div />
                 </div>
             }
         </div>

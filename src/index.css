@@ -22,5 +22,13 @@ body {
 }
 
 .content {
-  width: calc(100% - 250px);
+  width: 100%;
+}
+
+:root {
+  --light-gray-clr: hsl(0, 0%, 70%);
+  --light-yellow-clr: hsl(46, 76%, 53%);
+  --light-red-clr: hsl(13, 78%, 65%);
+
+  --df-border-clr: hsla(30, 2%, 35%, 0.5);
 }
