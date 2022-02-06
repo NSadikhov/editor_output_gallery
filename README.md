@@ -2,7 +2,7 @@
 
 ## Overview
 
-It is a simple editor, built with Web Technologies: (_HTML_, _CSS_, _JavaScript_), to design, modify and save shapes, external outline and color information of objects. 
+It is a simple editor, built with Web Technologies: (_HTML_, _CSS_, _JavaScript_), to design, modify and save shape, external outline and color information of objects. 
 
 A JavaScript library - [**React**](https://reactjs.org/) - is used for building, updating and rendering components to create interactive user interfaces.
 
